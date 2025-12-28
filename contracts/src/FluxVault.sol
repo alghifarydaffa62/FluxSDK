@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
 import {ERC4626} from "@openzeppelin/contracts/token/ERC20/extensions/ERC4626.sol";
@@ -12,4 +12,12 @@ contract FluxVault is ERC4626, Ownable {
         ERC20(_name, _symbol)
         Ownable(_initialOwner)
     {}
+
+    function decimals() public view virtual override(ERC4626) returns (uint8) {
+        return super.decimals();
+    }
+
+    function emergencyRescue(address token) external onlyOwner {
+        IERC20(token).transfer(msg.sender, IERC20(token).balanceOf(address(this)));
+    }
 }
