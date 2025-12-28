@@ -5,39 +5,22 @@ import {
   type WalletClient,
   type Address
 } from 'viem';
-import { mantleTestnet } from 'viem/chains'; 
+import { mantleSepoliaTestnet } from 'viem/chains';
+import { FLUX_VAULT_ABI, FLUX_FACTORY_ABI, ERC20_ABI } from './abi/FluxABI';
 
-const VAULT_ABI = [
-  {
-    name: 'deposit',
-    type: 'function',
-    stateMutability: 'nonpayable',
-    inputs: [{ name: 'assets', type: 'uint256' }, { name: 'receiver', type: 'address' }],
-    outputs: [{ name: 'shares', type: 'uint256' }]
-  },
-  {
-    name: 'totalAssets',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [],
-    outputs: [{ name: '', type: 'uint256' }]
-  },
-  {
-    name: 'convertToShares',
-    type: 'function',
-    stateMutability: 'view',
-    inputs: [{ name: 'assets', type: 'uint256' }],
-    outputs: [{ name: '', type: 'uint256' }]
-  }
-] as const;
+const VAULT_ABI = FLUX_VAULT_ABI
+const FACTORY_ABI = FLUX_FACTORY_ABI
+const ERC20ABI = ERC20_ABI
 
 export class FluxSDK {
   publicClient: PublicClient;
   walletClient?: WalletClient; 
+  chainId: number;
 
-  constructor(publicClient: PublicClient, walletClient?: WalletClient) {
+  constructor(publicClient: PublicClient, walletClient?: WalletClient, chainId: number = 5003) {
     this.publicClient = publicClient;
     this.walletClient = walletClient;
+    this.chainId = chainId
   }
 
   // ==========================================
@@ -67,9 +50,33 @@ export class FluxSDK {
     return formatUnits(shares, 18);
   }
 
+  async getAllVaults(factoryAddress: Address) {
+    const vaults = await this.publicClient.readContract({
+      address: factoryAddress,
+      abi: FACTORY_ABI,
+      functionName: 'getAllVaults',
+    });
+    return vaults;
+  }
+
   // ==========================================
   // WRITE FUNCTIONS 
   // ==========================================
+  async approve(tokenAddress: Address, vaultAddress: Address, amount: string): Promise<string> {
+    if (!this.walletClient || !this.walletClient.account) throw new Error("Wallet not connected!");
+    
+    const amountInWei = parseUnits(amount, 18);
+    
+    const hash = await this.walletClient.writeContract({
+      address: tokenAddress,
+      abi: ERC20ABI,
+      functionName: 'approve',
+      args: [vaultAddress, amountInWei],
+      chain: mantleSepoliaTestnet, 
+      account: this.walletClient.account.address
+    });
+    return hash;
+  }
 
   async deposit(vaultAddress: Address, amount: string): Promise<string> {
     if (!this.walletClient || !this.walletClient.account) {
@@ -84,10 +91,24 @@ export class FluxSDK {
       abi: VAULT_ABI,
       functionName: 'deposit',
       args: [amountInWei, userAddress], 
-      chain: mantleTestnet, 
+      chain: mantleSepoliaTestnet, 
       account: userAddress
     });
 
     return hash; 
+  }
+
+  async createVault(factoryAddress: Address, assetToken: Address, name: string, symbol: string): Promise<string> {
+    if (!this.walletClient || !this.walletClient.account) throw new Error("Wallet not connected!");
+
+    const hash = await this.walletClient.writeContract({
+      address: factoryAddress,
+      abi: FLUX_FACTORY_ABI,
+      functionName: 'deployVault',
+      args: [assetToken, name, symbol],
+      chain: mantleSepoliaTestnet,
+      account: this.walletClient.account.address
+    });
+    return hash;
   }
 }
