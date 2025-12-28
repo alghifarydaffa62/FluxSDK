@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.FLUX_VAULT_ABI = exports.FLUX_FACTORY_ABI = exports.ERC20_ABI = void 0;
-exports.ERC20_ABI = [
+export const ERC20_ABI = [
     {
         "type": "function",
         "name": "allowance",
@@ -23,7 +20,7 @@ exports.ERC20_ABI = [
         "stateMutability": "nonpayable"
     },
 ];
-exports.FLUX_FACTORY_ABI = [
+export const FLUX_FACTORY_ABI = [
     {
         "type": "function",
         "name": "allVaults",
@@ -116,7 +113,7 @@ exports.FLUX_FACTORY_ABI = [
     { "type": "error", "name": "InvalidNameOrSymbol", "inputs": [] },
     { "type": "error", "name": "ZeroAddress", "inputs": [] }
 ];
-exports.FLUX_VAULT_ABI = [
+export const FLUX_VAULT_ABI = [
     {
         "type": "constructor",
         "inputs": [
