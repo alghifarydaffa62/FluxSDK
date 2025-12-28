@@ -1,21 +1,25 @@
 {
-  "name": "sdk",
+  "name": "@flux/sdk",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "typescript": "^5.9.3",
-    "viem": "^2.43.3"
+    "viem": "^2.21.55"
   },
   "devDependencies": {
-    "@types/node": "^25.0.3"
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
   }
 }

@@ -15,6 +15,7 @@
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "^7.11.0",
+    "@flux/sdk": "file:../packages/sdk",
     "tailwindcss": "^4.1.18",
     "viem": "latest",
     "wagmi": "latest",
