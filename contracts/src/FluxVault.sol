@@ -8,7 +8,6 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Pausable} from "@openzeppelin/contracts/utils/Pausable.sol";
 
 contract FluxVault is ERC4626, Ownable, Pausable {
-
     error ZeroAssets();
     error ZeroAddress();
 
@@ -17,28 +16,37 @@ contract FluxVault is ERC4626, Ownable, Pausable {
         ERC20(_name, _symbol)
         Ownable(_admin)
     {
-        if(address(_asset) == address(0) || _admin == address(0)) revert ZeroAddress();
+        if (address(_asset) == address(0) || _admin == address(0)) revert ZeroAddress();
     }
 
-    function deposit(uint256 assets, address receiver) public override whenNotPaused returns(uint256) {
+    function deposit(uint256 assets, address receiver) public override whenNotPaused returns (uint256) {
         if (assets == 0) revert ZeroAssets();
-        if(receiver == address(0)) revert ZeroAddress();
+        if (receiver == address(0)) revert ZeroAddress();
 
         return super.deposit(assets, receiver);
     }
 
-    function mint(uint256 shares, address receiver) public override whenNotPaused returns(uint256) {
-        if(shares == 0) revert ZeroAssets();
-        if(receiver == address(0)) revert ZeroAddress();
+    function mint(uint256 shares, address receiver) public override whenNotPaused returns (uint256) {
+        if (shares == 0) revert ZeroAssets();
+        if (receiver == address(0)) revert ZeroAddress();
 
         return super.mint(shares, receiver);
     }
 
-    function withdraw(uint256 assets, address receiver, address owner) public override whenNotPaused returns (uint256) {
+    function withdraw(uint256 assets, address receiver, address owner)
+        public
+        override
+        whenNotPaused
+        returns (uint256)
+    {
+        if (receiver == address(0) || owner == address(0)) revert ZeroAddress();
+        if (assets == 0) revert ZeroAssets();
         return super.withdraw(assets, receiver, owner);
     }
 
     function redeem(uint256 shares, address receiver, address owner) public override whenNotPaused returns (uint256) {
+        if (receiver == address(0) || owner == address(0)) revert ZeroAddress();
+        if (shares == 0) revert ZeroAssets();
         return super.redeem(shares, receiver, owner);
     }
 

@@ -14,12 +14,15 @@ contract FluxFactory {
 
     VaultInfo[] public allVaults;
 
+    error ZeroAddress();
+    error InvalidNameOrSymbol();
+
     event VaultDeployed(address indexed vault, address indexed asset, string name, string symbol);
 
     function deployVault(address _asset, string memory _name, string memory _symbol) external returns (address) {
-        require(_asset != address(0), "Invalid asset Address");
-        require(bytes(_name).length > 0, "Invalid name");
-        require(bytes(_symbol).length > 0, "Invalid symbol");
+        if (address(_asset) == address(0)) revert ZeroAddress();
+
+        if (bytes(_name).length == 0 || bytes(_symbol).length == 0) revert InvalidNameOrSymbol();
 
         FluxVault newVault = new FluxVault(IERC20(_asset), _name, _symbol, msg.sender);
 
