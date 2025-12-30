@@ -1,5 +1,12 @@
 import { Dispatch, SetStateAction, FormEvent } from 'react';
 
+export interface VaultData {
+    vaultAddress: string;
+    assetAddress: string;
+    name: string;
+    symbol: string;
+    totalAssets?: string;
+}
 export interface VaultFormData {
     asset: string;
     name: string;
