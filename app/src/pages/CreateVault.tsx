@@ -1,4 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useConnections } from "wagmi";
+import { useNavigate } from "react-router-dom";
 import useCreateVault from "../hooks/useCreateVault"
 import CreateVaultHeader from "../component/CreateVaultHeader";
 import CreateVaultForm from "../component/CreateVaultForm";
@@ -7,6 +9,14 @@ import SuccessMessage from "../component/SuccessMessage";
 
 export default function CreateVault() {
     const { deployVault, isSuccess, isLoading, error, txHash } = useCreateVault()
+    const connection = useConnections()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(connection.length == 0) {
+            navigate('/')
+        }
+    }, [connection, navigate])
 
     const [formData, setFormData] = useState({
         asset: '',
@@ -18,6 +28,7 @@ export default function CreateVault() {
         e.preventDefault();
         deployVault(formData.asset, formData.name, formData.symbol);
     };
+
     return(
         <div className="max-w-2xl mx-auto space-y-8">
             <CreateVaultHeader/>
