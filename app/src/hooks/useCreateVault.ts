@@ -10,7 +10,7 @@ export default function useCreateVault() {
     const [error, setError] = useState<string | null>(null)
     const [txHash, setTxHash] = useState<string | null>(null)
 
-    const FACTORY = import.meta.env.VITE_FACTORY_ADDRESS
+    const FACTORY = "0x7f0A1F76F2Bc41Cae039801C2A93712743069491"
 
     const deployVault = async(assetAddress: string, name: string, symbol: string) => {
         if(!flux) {

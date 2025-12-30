@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFlux } from "./useFlux";
 import { VaultData } from "../types/types";
+import { type Address } from "viem";
 
 export default function useFetchVaults() {
     const flux = useFlux()
-    const FACTORY = import.meta.env.VITE_FACTORY_ADDRESS
+    const FACTORY = "0x7f0A1F76F2Bc41Cae039801C2A93712743069491"
 
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -17,7 +18,7 @@ export default function useFetchVaults() {
         setError(null)
 
         try {
-            const data = await flux.getAllVaults(FACTORY as any)
+            const data = await flux.getAllVaults(FACTORY as Address)
 
             const formattedVaults: VaultData[] = data.map((item: any) => ({
                 vaultAddress: item.vaultAddress || item[0],
