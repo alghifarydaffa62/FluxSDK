@@ -1,7 +1,6 @@
 import { useConnection, useConnections } from "wagmi"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
-import { ConnectButton } from "@rainbow-me/rainbowkit"
 
 export default function Dashboard() {
     const { address } = useConnection()
@@ -15,10 +14,8 @@ export default function Dashboard() {
     }, [connection, navigate])
 
     return(
-        <div className="bg-blue-950 min-h-screen">
-            <h1 className="text-xl text-white">Welcome to dashboard, {address?.slice(0, 10)}...{address?.slice(-10)}</h1>
-
-            <ConnectButton showBalance={false}/>
+        <div>
+            <h1>Hello, {address?.slice(0, 10)}...{address?.slice(-10)}</h1>
         </div>
     )
 }
