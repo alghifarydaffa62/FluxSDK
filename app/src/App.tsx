@@ -4,7 +4,7 @@ import DashboardLayout from "./layout/DashboardLayout"
 import Dashboard from "./pages/Dashboard"
 import Vaults from "./pages/Vaults"
 import Portfolio from "./pages/Portfolio"
-import CreateVault from "./pages/CreateVaults"
+import CreateVault from "./pages/CreateVault"
 
 function App() {
   return (
