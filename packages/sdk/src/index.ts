@@ -27,6 +27,56 @@ export class FluxSDK {
   // READ FUNCTIONS 
   // ==========================================
 
+  async getVaultInfo(vaultAddress: Address, userAddress?: Address) {
+    if (!vaultAddress) throw new Error("Vault address required");
+
+    const vaultContract = {
+      address: vaultAddress,
+      abi: VAULT_ABI
+    } as const
+
+    const [name, symbol, decimals, asset, totalAssets] = await Promise.all([
+      this.publicClient.readContract({...vaultContract, functionName: 'name'}),
+      this.publicClient.readContract({...vaultContract, functionName: 'symbol'}),
+      this.publicClient.readContract({...vaultContract, functionName: 'decimals'}),
+      this.publicClient.readContract({...vaultContract, functionName: 'asset'}),
+      this.publicClient.readContract({...vaultContract, functionName: 'totalAssets'}),
+    ])
+
+    let userShareBalance = 0n
+    let userAssetValue =  0n
+
+    if (userAddress) {
+      userShareBalance = await this.publicClient.readContract({
+        ...vaultContract,
+        functionName: 'balanceOf',
+        args: [userAddress]
+      }) as bigint;
+
+      if (userShareBalance > 0n) {
+        userAssetValue = await this.publicClient.readContract({
+          ...vaultContract,
+          functionName: 'convertToAssets',
+          args: [userShareBalance]
+        }) as bigint;
+      }
+    }
+
+    return {
+      address: vaultAddress,
+      name: name as string,
+      symbol: symbol as string,
+      decimals: Number(decimals),
+      assetAddress: asset as Address,
+
+      totalAssets: totalAssets as bigint,
+      userShareBalance: userShareBalance,
+      userAssetValue: userAssetValue,
+
+      formattedTVL: formatUnits(totalAssets as bigint, Number(decimals)),
+      formattedUserBalance: formatUnits(userAssetValue, Number(decimals)) 
+    };
+  }
   async getVaultTVL(vaultAddress: Address): Promise<string> {
     const data = await this.publicClient.readContract({
       address: vaultAddress,
