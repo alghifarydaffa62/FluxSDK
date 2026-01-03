@@ -4,6 +4,18 @@ export declare class FluxSDK {
     walletClient?: WalletClient;
     chainId: number;
     constructor(publicClient: PublicClient, walletClient?: WalletClient, chainId?: number);
+    getVaultInfo(vaultAddress: Address, userAddress?: Address): Promise<{
+        address: `0x${string}`;
+        name: string;
+        symbol: string;
+        decimals: number;
+        assetAddress: Address;
+        totalAssets: bigint;
+        userShareBalance: bigint;
+        userAssetValue: bigint;
+        formattedTVL: string;
+        formattedUserBalance: string;
+    }>;
     getVaultTVL(vaultAddress: Address): Promise<string>;
     previewDeposit(vaultAddress: Address, amount: string): Promise<string>;
     getAllVaults(factoryAddress: Address): Promise<readonly {
