@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, FormEvent } from 'react';
-
+import { Address } from 'viem';
 export interface VaultData {
     vaultAddress: string;
     assetAddress: string;
@@ -7,6 +7,20 @@ export interface VaultData {
     symbol: string;
     totalAssets?: string;
 }
+
+export interface VaultInfo {
+    address: Address;
+    name: string;
+    symbol: string;
+    decimals: number;
+    assetAddress: Address;
+    totalAssets: bigint;
+    userShareBalance: bigint;
+    userAssetValue: bigint;
+    formattedTVL: string;
+    formattedUserBalance: string;
+}
+
 export interface VaultFormData {
     asset: string;
     name: string;

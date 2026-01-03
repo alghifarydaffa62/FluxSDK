@@ -16,6 +16,49 @@ export class FluxSDK {
     // ==========================================
     // READ FUNCTIONS 
     // ==========================================
+    async getVaultInfo(vaultAddress, userAddress) {
+        if (!vaultAddress)
+            throw new Error("Vault address required");
+        const vaultContract = {
+            address: vaultAddress,
+            abi: VAULT_ABI
+        };
+        const [name, symbol, decimals, asset, totalAssets] = await Promise.all([
+            this.publicClient.readContract({ ...vaultContract, functionName: 'name' }),
+            this.publicClient.readContract({ ...vaultContract, functionName: 'symbol' }),
+            this.publicClient.readContract({ ...vaultContract, functionName: 'decimals' }),
+            this.publicClient.readContract({ ...vaultContract, functionName: 'asset' }),
+            this.publicClient.readContract({ ...vaultContract, functionName: 'totalAssets' }),
+        ]);
+        let userShareBalance = 0n;
+        let userAssetValue = 0n;
+        if (userAddress) {
+            userShareBalance = await this.publicClient.readContract({
+                ...vaultContract,
+                functionName: 'balanceOf',
+                args: [userAddress]
+            });
+            if (userShareBalance > 0n) {
+                userAssetValue = await this.publicClient.readContract({
+                    ...vaultContract,
+                    functionName: 'convertToAssets',
+                    args: [userShareBalance]
+                });
+            }
+        }
+        return {
+            address: vaultAddress,
+            name: name,
+            symbol: symbol,
+            decimals: Number(decimals),
+            assetAddress: asset,
+            totalAssets: totalAssets,
+            userShareBalance: userShareBalance,
+            userAssetValue: userAssetValue,
+            formattedTVL: formatUnits(totalAssets, Number(decimals)),
+            formattedUserBalance: formatUnits(userAssetValue, Number(decimals))
+        };
+    }
     async getVaultTVL(vaultAddress) {
         const data = await this.publicClient.readContract({
             address: vaultAddress,
