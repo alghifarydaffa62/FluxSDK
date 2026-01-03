@@ -39,3 +39,25 @@ export interface CreateVaultButtonProps {
     isLoading: boolean;
     isSuccess: boolean;
 }
+
+export interface HeaderVaultDetail {
+    address: Address;
+    name: string;
+    symbol: string;
+}
+
+export interface HeaderProps {
+    data: HeaderVaultDetail;
+    onRefresh: () => void; 
+}
+
+export interface VaultStatsInfo {
+    formattedTVL: string;
+    formattedUserBalance: string;
+    assetAddress: Address;
+    symbol: string;
+}
+
+export interface VaultStatsProps {
+    data: VaultStatsInfo;
+}
