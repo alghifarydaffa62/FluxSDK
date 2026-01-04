@@ -61,3 +61,11 @@ export interface VaultStatsInfo {
 export interface VaultStatsProps {
     data: VaultStatsInfo;
 }
+
+export interface DepositProps {
+    vaultAddress: Address;
+    assetAddress: Address;
+    symbol: string;
+    decimals: number;
+    onSuccess?: () => void;
+}
