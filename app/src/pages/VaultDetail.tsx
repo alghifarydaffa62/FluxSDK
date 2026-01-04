@@ -4,8 +4,8 @@ import { Loader2 } from 'lucide-react';
 import { useState } from "react";
 import Header from "../component/VaultDetail/Header";
 import VaultStats from "../component/VaultDetail/VaultStats";
-import Deposit from "../component/VaultDetail/Deposit";
 import BackButton from "../component/BackButton";
+import DepositForm from "../component/VaultDetail/DepositForm";
 
 export default function VaultDetail() {
     const { vaultAddress } = useParams<{ vaultAddress: string }>()
@@ -61,7 +61,15 @@ export default function VaultDetail() {
                 <div className="p-8">
                     {activeTab === 'deposit' ? (
                         <div className="space-y-6">
-                            <Deposit/>
+                            <DepositForm 
+                                vaultAddress={data.address}
+                                assetAddress={data.assetAddress}
+                                symbol={data.symbol}
+                                decimals={data.decimals}
+                                onSuccess={() => {
+                                    refetch()
+                                }}
+                            />
                         </div>
                     ) : (
                         <div className="text-center py-10 text-gray-500">
