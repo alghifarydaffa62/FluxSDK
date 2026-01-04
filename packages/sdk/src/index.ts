@@ -109,6 +109,17 @@ export class FluxSDK {
     return vaults;
   }
 
+  async getAllowance(vaultAddress: Address, assetAddress: Address, owner: Address) {
+    const allowance = await this.publicClient.readContract({
+      address: assetAddress,
+      abi: ERC20ABI,
+      functionName: "allowance",
+      args: [owner, vaultAddress]
+    })
+
+    return allowance as bigint
+  }
+
   // ==========================================
   // WRITE FUNCTIONS 
   // ==========================================

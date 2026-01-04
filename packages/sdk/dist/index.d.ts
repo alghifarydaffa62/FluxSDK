@@ -24,6 +24,7 @@ export declare class FluxSDK {
         name: string;
         symbol: string;
     }[]>;
+    getAllowance(vaultAddress: Address, assetAddress: Address, owner: Address): Promise<bigint>;
     approve(tokenAddress: Address, vaultAddress: Address, amount: string): Promise<string>;
     deposit(vaultAddress: Address, amount: string): Promise<string>;
     createVault(factoryAddress: Address, assetToken: Address, name: string, symbol: string): Promise<string>;
