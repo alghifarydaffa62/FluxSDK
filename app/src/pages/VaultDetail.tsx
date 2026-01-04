@@ -1,7 +1,8 @@
 import { useVaultData } from "../hooks/useVaultData"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { Loader2 } from 'lucide-react';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useConnections } from "wagmi";
 import Header from "../component/VaultDetail/Header";
 import VaultStats from "../component/VaultDetail/VaultStats";
 import BackButton from "../component/BackButton";
@@ -11,6 +12,14 @@ export default function VaultDetail() {
     const { vaultAddress } = useParams<{ vaultAddress: string }>()
     const { data, error, isLoading, refetch } = useVaultData(vaultAddress)
     const [activeTab, setActiveTab] = useState<'deposit' | 'withdraw'>('deposit');
+    const connection = useConnections()
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(connection.length == 0) {
+            navigate('/')
+        }
+    }, [connection, navigate])
 
     if (isLoading) {
         return (

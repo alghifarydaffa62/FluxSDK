@@ -26,7 +26,6 @@ export class FluxSDK {
   // ==========================================
   // READ FUNCTIONS 
   // ==========================================
-
   async getVaultInfo(vaultAddress: Address, userAddress?: Address) {
     if (!vaultAddress) throw new Error("Vault address required");
 
@@ -77,6 +76,7 @@ export class FluxSDK {
       formattedUserBalance: formatUnits(userAssetValue, Number(decimals)) 
     };
   }
+
   async getVaultTVL(vaultAddress: Address): Promise<string> {
     const data = await this.publicClient.readContract({
       address: vaultAddress,
@@ -171,5 +171,43 @@ export class FluxSDK {
       account: this.walletClient.account.address
     });
     return hash;
+  }
+
+  async redeem(vaultAddress: Address, sharesAmount: bigint, receiver?: Address, owner?: Address): Promise<string> {
+    if (!this.walletClient || !this.walletClient.account) throw new Error("Wallet not connected!");
+    const userAddress = this.walletClient.account.address
+
+    const targetReceiver = receiver || userAddress
+    const targetOwner = owner || userAddress
+
+    const hash = await this.walletClient.writeContract({
+      address: vaultAddress,
+      abi: VAULT_ABI,
+      functionName: "redeem",
+      args: [sharesAmount, targetReceiver, targetOwner],
+      chain: mantleSepoliaTestnet,
+      account: userAddress
+    })
+
+    return hash
+  }
+
+  async withdraw(vaultAddress: Address, assetAmount: bigint, receiver?: Address, owner?: Address): Promise<string> {
+    if (!this.walletClient || !this.walletClient.account) throw new Error("Wallet not connected!");
+    const userAddress = this.walletClient.account.address
+
+    const targetReceiver = receiver || userAddress;
+    const targetOwner = owner || userAddress;
+
+    const withdrawHash = await this.walletClient.writeContract({
+      address: vaultAddress,
+      abi: VAULT_ABI,
+      functionName: "withdraw",
+      args: [assetAmount, targetReceiver, targetOwner],
+      chain: mantleSepoliaTestnet,
+      account: userAddress
+    })
+
+    return withdrawHash
   }
 }
