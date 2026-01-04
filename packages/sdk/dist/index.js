@@ -140,4 +140,36 @@ export class FluxSDK {
         });
         return hash;
     }
+    async redeem(vaultAddress, sharesAmount, receiver, owner) {
+        if (!this.walletClient || !this.walletClient.account)
+            throw new Error("Wallet not connected!");
+        const userAddress = this.walletClient.account.address;
+        const targetReceiver = receiver || userAddress;
+        const targetOwner = owner || userAddress;
+        const hash = await this.walletClient.writeContract({
+            address: vaultAddress,
+            abi: VAULT_ABI,
+            functionName: "redeem",
+            args: [sharesAmount, targetReceiver, targetOwner],
+            chain: mantleSepoliaTestnet,
+            account: userAddress
+        });
+        return hash;
+    }
+    async withdraw(vaultAddress, assetAmount, receiver, owner) {
+        if (!this.walletClient || !this.walletClient.account)
+            throw new Error("Wallet not connected!");
+        const userAddress = this.walletClient.account.address;
+        const targetReceiver = receiver || userAddress;
+        const targetOwner = owner || userAddress;
+        const withdrawHash = await this.walletClient.writeContract({
+            address: vaultAddress,
+            abi: VAULT_ABI,
+            functionName: "withdraw",
+            args: [assetAmount, targetReceiver, targetOwner],
+            chain: mantleSepoliaTestnet,
+            account: userAddress
+        });
+        return withdrawHash;
+    }
 }
