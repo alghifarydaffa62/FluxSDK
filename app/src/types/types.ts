@@ -69,3 +69,11 @@ export interface DepositProps {
     decimals: number;
     onSuccess?: () => void;
 }
+
+export interface WithdrawProps {
+    vaultAddress: Address;
+    decimals: number;
+    symbol: string;
+    maxBalance: string;
+    onSuccess?: () => void;
+}

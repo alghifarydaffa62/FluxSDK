@@ -7,6 +7,7 @@ import Header from "../component/VaultDetail/Header";
 import VaultStats from "../component/VaultDetail/VaultStats";
 import BackButton from "../component/BackButton";
 import DepositForm from "../component/VaultDetail/DepositForm";
+import WithdrawForm from "../component/VaultDetail/WithdrawForm";
 
 export default function VaultDetail() {
     const { vaultAddress } = useParams<{ vaultAddress: string }>()
@@ -81,8 +82,14 @@ export default function VaultDetail() {
                             />
                         </div>
                     ) : (
-                        <div className="text-center py-10 text-gray-500">
-                            Withdraw feature coming soon...
+                        <div>
+                            <WithdrawForm 
+                                vaultAddress={data.address} 
+                                decimals={data.decimals} 
+                                symbol={data.symbol}
+                                maxBalance={data.formattedUserBalance}
+                                onSuccess={() => refetch()}
+                            />
                         </div>
                     )}
                 </div>
