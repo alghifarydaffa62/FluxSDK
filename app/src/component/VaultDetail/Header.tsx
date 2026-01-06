@@ -24,7 +24,7 @@ export default function Header({ data, onRefresh }: HeaderProps) {
                         <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
                             <span>{data.symbol}</span>
                             <span className="w-1 h-1 rounded-full bg-gray-600"></span>
-                            <span className="truncate max-w-37.5">{data.address}</span>
+                            <span className="">{data.address}</span>
                         </div>
                     </div>
                 </div>

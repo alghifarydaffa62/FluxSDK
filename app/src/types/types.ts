@@ -77,3 +77,16 @@ export interface WithdrawProps {
     maxBalance: string;
     onSuccess?: () => void;
 }
+
+export interface PortfolioItem {
+    name: string;
+    symbol: string;
+    address: Address;
+    balance: string;     
+    balanceUsd: number;   
+    decimals: number;
+}
+
+export interface PositionProps {
+    position: PortfolioItem
+}
