@@ -19,7 +19,6 @@ export default function useFetchVaults() {
 
         try {
             const data = await flux.getAllVaults(FACTORY as Address)
-
             const formattedVaults: VaultData[] = data.map((item: any) => ({
                 vaultAddress: item.vaultAddress || item[0],
                 assetAddress: item.assetAddress || item[1],
@@ -27,7 +26,16 @@ export default function useFetchVaults() {
                 symbol: item.symbol || item[3]
             }))
 
-            setVaults(formattedVaults)
+            const tvlPromises = formattedVaults.map((vault: any) => flux.getVaultTVL(vault.vaultAddress))
+
+            const tvl = await Promise.all(tvlPromises)
+
+            const allVaults = formattedVaults.map((vault: any, index: number) => ({
+                ...vault,
+                totalAssets: tvl[index]
+            }))
+
+            setVaults(allVaults)
         } catch (error: any) {
             console.error("error fetching vaults: ", error)
             setError(error.message || "error fetching vaults")

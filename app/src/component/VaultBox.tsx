@@ -26,7 +26,7 @@ export default function VaultBox({ vault }: {vault: VaultData}) {
             <div className="grid grid-cols-2 gap-4 mb-6 py-4 border-y border-white/5">
                 <div>
                     <p className="text-xs text-gray-500 mb-1">Total Assets</p>
-                    <p className="text-white font-mono font-medium">Coming Soon</p>
+                    <p className="text-white font-mono font-medium">{vault.totalAssets}</p>
                 </div>
                 <div>
                     <p className="text-xs text-gray-500 mb-1">Asset Address</p>
