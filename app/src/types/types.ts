@@ -90,3 +90,9 @@ export interface PortfolioItem {
 export interface PositionProps {
     position: PortfolioItem
 }
+
+export interface StatCardProps {
+    protocolTVL: number;
+    userNetWorth: number;
+    yieldGenerated: number;
+}
