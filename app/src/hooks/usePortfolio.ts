@@ -61,4 +61,6 @@ export function usePortfolio() {
 
         fetchPortfolio();
     }, [flux, userAddress])
+
+    return { positions, netWorth, isLoading }
 }

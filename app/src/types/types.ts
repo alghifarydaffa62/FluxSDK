@@ -86,3 +86,7 @@ export interface PortfolioItem {
     balanceUsd: number;   
     decimals: number;
 }
+
+export interface PositionProps {
+    position: PortfolioItem
+}
