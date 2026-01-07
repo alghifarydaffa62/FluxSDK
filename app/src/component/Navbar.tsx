@@ -1,24 +1,45 @@
-import { Link } from "react-router-dom"
 import { ConnectButton } from "@rainbow-me/rainbowkit"
+import { useState } from "react"
+import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
+    const [isOpen, setIsOpen] = useState(false);
+
     return(
-        <nav className="flex justify-around">
-            <h1>Flux Protocol</h1>
+        <nav className="fixed top-0 w-full bg-white/80 backdrop-blur-md border-b border-zinc-200 z-50">
+            <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                <div className="flex justify-around items-center h-16">
+                    <div className="flex items-center space-x-2">
+                        <div className="w-8 h-8 bg-zinc-900 rounded flex items-center justify-center">
+                            <span className="text-white font-bold text-sm">F</span>
+                        </div>
+                        <span className="text-xl font-bold text-zinc-900">Flux</span>
+                    </div>
 
-            <ul className="flex gap-5">
-                <li>
-                    <Link to='/'>Home</Link>
-                </li>
-                <li>
-                    <Link to='/'>About</Link>
-                </li>
-                <li>
-                    <Link to='/'>Features</Link>
-                </li>
-            </ul>
+                    <div className="hidden md:flex items-center space-x-8">
+                        <a href="#about" className="text-zinc-600 hover:text-zinc-900 transition-colors">About</a>
+                        <a href="#features" className="text-zinc-600 hover:text-zinc-900 transition-colors">Features</a>
+                        <a href="#docs" className="text-zinc-600 hover:text-zinc-900 transition-colors">Docs</a>
+                    </div>
 
-            <ConnectButton/>
+                    <ConnectButton/>
+
+                    <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
+                        {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                    </button>
+                </div>
+            </div>
+
+            {isOpen && (
+                <div className="md:hidden bg-white border-t border-zinc-200">
+                    <div className="px-6 py-4 space-y-4">
+                        <a href="#features" className="block text-zinc-600">Features</a>
+                        <a href="#solutions" className="block text-zinc-600">Solutions</a>
+                        <a href="#docs" className="block text-zinc-600">Docs</a>
+                        <ConnectButton/>
+                    </div>
+                </div>
+            )}
         </nav>
     )
 }

@@ -2,6 +2,11 @@ import Navbar from '../component/Navbar'
 import { useNavigate } from 'react-router-dom'
 import { useConnections } from 'wagmi'
 import { useEffect } from 'react'
+import Hero from '../component/Home/Hero'
+import CodeDemo from '../component/Home/CodeDemo'
+import Features from '../component/Home/Features'
+import CTA from '../component/Home/CTA'
+import Footer from '../component/Home/Footer'
 
 export default function Home() {
     const connection = useConnections()
@@ -14,12 +19,13 @@ export default function Home() {
     }, [connection, navigate])
 
     return (
-        <div className="min-h-screen bg-gray-900 text-white p-10">
+        <div className="bg-white min-h-screen">
             <Navbar/>
-            <h1 className="text-4xl font-bold mb-4">Flux Protocol</h1>
-            <div className="p-4 border border-green-500 rounded-lg bg-green-900/20">
-                <p className="text-green-400 font-mono">✅ SDK Integrated Successfully</p>
-            </div>
+            <Hero/>
+            <CodeDemo/>
+            <Features/>
+            <CTA/>
+            <Footer/>
         </div>
     )
 }
