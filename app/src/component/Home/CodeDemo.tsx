@@ -55,14 +55,14 @@ export default function CodeDemo() {
 
                     <div className="p-6 font-mono text-sm">
                         <div className="text-zinc-500">// Install the SDK</div>
-                        <div className="text-green-400 mb-4">$ npm install @flux/sdk</div>
+                        <div className="text-green-400 mb-4">$ npm install @flux_protocol/flux-sdk</div>
                     
                         <div className="text-zinc-500 mt-6">// Create a vault in seconds</div>
                         <div className="text-purple-400">
                             import
                             <span className="text-white"> {'{ FluxSDK }'} </span>
                             <span className="text-purple-400">from</span>
-                            <span className="text-yellow-300"> '@flux/sdk'</span>
+                            <span className="text-yellow-300"> '@flux_protocol/flux-sdk'</span>
                             <span className="text-white">;</span>
                         </div>
 
