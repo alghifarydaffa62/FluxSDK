@@ -1,4 +1,4 @@
-import { PortfolioItem } from "../types/types";
+import { PortfolioItem } from "@flux_protocol/flux-sdk";
 import { useState, useEffect } from "react";
 import { useConnection } from "wagmi";
 import { useFlux } from "./useFlux";

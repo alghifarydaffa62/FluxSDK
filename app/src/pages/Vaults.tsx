@@ -3,7 +3,7 @@ import { useConnections } from "wagmi";
 import { useNavigate } from "react-router-dom";
 import useFetchVaults from "../hooks/useFetchVaults";
 import VaultBox from "../component/VaultBox";
-import { Loader2, AlertCircle } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import ErrorMessage from "../component/ErrorMessage";
 
 export default function Vaults() {

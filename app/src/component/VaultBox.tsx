@@ -1,4 +1,4 @@
-import { VaultData } from "../types/types"
+import { VaultData } from "@flux_protocol/flux-sdk"
 import { Coins, ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 

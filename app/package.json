@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@flux_protocol/flux-sdk": "^1.0.0",
     "@flux/sdk": "file:../packages/sdk",
     "@rainbow-me/rainbowkit": "^2.2.10",
     "@tailwindcss/vite": "^4.1.18",

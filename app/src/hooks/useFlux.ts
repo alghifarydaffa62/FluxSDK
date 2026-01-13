@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { usePublicClient, useWalletClient } from "wagmi";
-import { FluxSDK } from "@flux/sdk"
+import { FluxSDK } from "@flux_protocol/flux-sdk"
 
 export function useFlux() {
     const publicClient = usePublicClient()

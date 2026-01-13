@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useFlux } from "./useFlux";
 import { useConnection } from "wagmi";
 import { type Address } from "viem";
-import { VaultInfo } from "../types/types";
+import { VaultInfo } from "@flux_protocol/flux-sdk";
 
 export function useVaultData(vaultAddress: string | undefined) {
     const flux = useFlux()

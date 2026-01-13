@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useFlux } from "./useFlux";
-import { VaultData } from "../types/types";
+import { VaultData } from "@flux_protocol/flux-sdk";
 import { type Address } from "viem";
 
 export default function useFetchVaults() {
