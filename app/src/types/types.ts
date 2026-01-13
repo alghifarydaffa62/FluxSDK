@@ -1,25 +1,7 @@
 import { Dispatch, SetStateAction, FormEvent } from 'react';
 import { Address } from 'viem';
-export interface VaultData {
-    vaultAddress: string;
-    assetAddress: string;
-    name: string;
-    symbol: string;
-    totalAssets?: string;
-}
-
-export interface VaultInfo {
-    address: Address;
-    name: string;
-    symbol: string;
-    decimals: number;
-    assetAddress: Address;
-    totalAssets: bigint;
-    userShareBalance: bigint;
-    userAssetValue: bigint;
-    formattedTVL: string;
-    formattedUserBalance: string;
-}
+import { VaultStatsInfo } from '@flux_protocol/flux-sdk';
+import { PortfolioItem } from '@flux_protocol/flux-sdk';
 
 export interface VaultFormData {
     asset: string;
@@ -51,13 +33,6 @@ export interface HeaderProps {
     onRefresh: () => void; 
 }
 
-export interface VaultStatsInfo {
-    formattedTVL: string;
-    formattedUserBalance: string;
-    assetAddress: Address;
-    symbol: string;
-}
-
 export interface VaultStatsProps {
     data: VaultStatsInfo;
 }
@@ -76,15 +51,6 @@ export interface WithdrawProps {
     symbol: string;
     maxBalance: string;
     onSuccess?: () => void;
-}
-
-export interface PortfolioItem {
-    name: string;
-    symbol: string;
-    address: Address;
-    balance: string;     
-    balanceUsd: number;   
-    decimals: number;
 }
 
 export interface PositionProps {
