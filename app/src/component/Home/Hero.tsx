@@ -45,9 +45,11 @@ export default function Hero () {
                     className="text-center"
                 >
                     <h1 className="text-5xl md:text-7xl font-bold text-zinc-900 mb-6 leading-tight">
+                        <span className='text-cyan-600'>Flux SDK.</span>
+                        <br/>
                         The infrastructure to
                         <br />
-                        <span className="text-[#FF4F00]">
+                        <span className="text-cyan-600">
                             {displayText}
                         <span className="animate-pulse">|</span>
                         </span>

@@ -1,6 +1,7 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit"
 import { useState } from "react"
-import { Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react'
+import Logo from "../asset/logo.png"
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,12 +11,8 @@ export default function Navbar() {
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="flex justify-around items-center h-16">
                     <div className="flex items-center space-x-2">
-                        <div className="w-8 h-8 bg-zinc-900 rounded flex items-center justify-center">
-                            <span className="text-white font-bold text-sm">F</span>
-                        </div>
-                        <span className="text-xl font-bold text-zinc-900">Flux</span>
+                        <img src={Logo} alt="" className="w-20 h-20"/>
                     </div>
-
                     <div className="hidden md:flex items-center space-x-8">
                         <a href="#about" className="text-zinc-600 hover:text-zinc-900 transition-colors">About</a>
                         <a href="#features" className="text-zinc-600 hover:text-zinc-900 transition-colors">Features</a>
