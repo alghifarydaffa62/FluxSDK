@@ -24,6 +24,8 @@ export default function DepositForm({ vaultAddress, assetAddress, decimals, symb
                     type="number" 
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
+                    onWheel={(e) => (e.target as HTMLInputElement).blur()}
+                    onKeyDown={(e) => ["-", "+", "e", "E"].includes(e.key) && e.preventDefault()}
                     disabled={isLoading} 
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-4 text-2xl text-white placeholder-gray-600 focus:outline-none focus:border-green-500 transition-colors disabled:opacity-50"
                     placeholder="0.0"
@@ -60,7 +62,7 @@ export default function DepositForm({ vaultAddress, assetAddress, decimals, symb
                         {statusMessage} 
                     </>
                 ) : approval ? (
-                    `Approve ${symbol}`
+                    `Approve Mock USDY`
                 ) : (
                     "Deposit Assets"
                 )}

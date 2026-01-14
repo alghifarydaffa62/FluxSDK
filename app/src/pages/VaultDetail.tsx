@@ -44,6 +44,24 @@ export default function VaultDetail() {
             {data && <Header data={data} onRefresh={refetch}/>}
             {data && <VaultStats data={data} />}
 
+            <div className="mb-6 p-4 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl flex items-start gap-3">
+                <span className="text-xl">💡</span>
+                <div className="text-sm">
+                    <p className="font-semibold text-blue-700 dark:text-blue-300">
+                        Need Testnet Assets?
+                    </p>
+                    <p className="text-blue-600 dark:text-blue-400 mt-1">
+                        To test the feature, you need Mock USDY. 
+                        <a 
+                            href="/dashboard/faucet" 
+                            className="underline font-bold hover:text-blue-800 ml-1"
+                            >
+                            Mint tokens at Faucet ↗
+                        </a>
+                    </p>
+                </div>
+            </div>
+
             <div className="bg-[#0A0A0A] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
                 <div className="flex border-b border-white/10">
                     <button
