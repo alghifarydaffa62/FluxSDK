@@ -20,7 +20,7 @@ function App() {
             <Route path="portfolio" element={<Portfolio/>}/>
             <Route path="create" element={<CreateVault/>}/>
             <Route path="vaults/:vaultAddress" element={<VaultDetail/>}/>
-            <Route path="faucet/" element={<Faucet/>}/>
+            <Route path="faucet" element={<Faucet/>}/>
           </Route>
         </Routes>
       </Router>
