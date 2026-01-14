@@ -6,6 +6,7 @@ import Vaults from "./pages/Vaults"
 import Portfolio from "./pages/Portfolio"
 import CreateVault from "./pages/CreateVault"
 import VaultDetail from "./pages/VaultDetail"
+import Faucet from "./pages/Faucet"
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="portfolio" element={<Portfolio/>}/>
             <Route path="create" element={<CreateVault/>}/>
             <Route path="vaults/:vaultAddress" element={<VaultDetail/>}/>
+            <Route path="faucet/" element={<Faucet/>}/>
           </Route>
         </Routes>
       </Router>
