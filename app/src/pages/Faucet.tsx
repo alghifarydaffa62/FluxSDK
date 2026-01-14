@@ -48,18 +48,6 @@ export default function Faucet() {
     if (!mounted) return null;
     
     return(
-        <>
-            <style jsx global>{`
-                input[type=number]::-webkit-inner-spin-button, 
-                input[type=number]::-webkit-outer-spin-button { 
-                    -webkit-appearance: none; 
-                    margin: 0; 
-                }
-                input[type=number] {
-                    -moz-appearance: textfield;
-                }
-            `}</style>
-
             <div className="flex flex-col items-center justify-center min-h-[80vh] px-4 py-12">
                 <div className="w-full max-w-lg p-8 space-y-8 bg-white dark:bg-zinc-900 rounded-3xl border border-zinc-100 dark:border-zinc-800 shadow-2xl text-center relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-full h-2 bg-linear-to-r from-blue-500 via-cyan-500 to-blue-600"></div>
@@ -159,6 +147,5 @@ export default function Faucet() {
                     )}
                 </div>
             </div>
-        </>
     )
 }
