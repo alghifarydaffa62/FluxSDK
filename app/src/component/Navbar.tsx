@@ -16,7 +16,7 @@ export default function Navbar() {
                     <div className="hidden md:flex items-center space-x-8">
                         <a href="#about" className="text-zinc-600 hover:text-zinc-900 transition-colors">About</a>
                         <a href="#features" className="text-zinc-600 hover:text-zinc-900 transition-colors">Features</a>
-                        <a href="#docs" className="text-zinc-600 hover:text-zinc-900 transition-colors">Docs</a>
+                        <a href="https://flux-sdk.gitbook.io/flux-sdk-docs/" target="_blank" className="text-zinc-600 hover:text-zinc-900 transition-colors">Docs</a>
                     </div>
 
                     <ConnectButton/>

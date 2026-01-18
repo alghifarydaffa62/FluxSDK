@@ -28,7 +28,7 @@ export default function Footer() {
                 <div>
                     <h4 className="font-semibold text-zinc-900 mb-4">Developers</h4>
                     <ul className="space-y-2 text-sm text-zinc-600">
-                        <li><a href="#" className="hover:text-zinc-900">Documentation</a></li>
+                        <li><a href="https://flux-sdk.gitbook.io/flux-sdk-docs/" target='_blank' className="hover:text-zinc-900">Documentation</a></li>
                     </ul>
                 </div>
 
